@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ConfigController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,8 +13,23 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::view('/', 'welcome');
+*/
+Route::get('/', HomeController::class);
+
+
+Route::prefix('/config')->group(function () {
+    Route::get('/', [ConfigController::class, 'index']);
+    Route::get('info', [ConfigController::class,'info']);
+    Route::get('permissoes', [ConfigController::class,'permissoes']);
+});
+
+Route::fallback(function(){
+    return view('404');
 });
