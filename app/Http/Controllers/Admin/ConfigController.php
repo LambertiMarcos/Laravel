@@ -7,11 +7,18 @@ use Illuminate\Http\Request;
 
 class ConfigController extends Controller
 {
-    public function index(Request $request) {
-        $url = $request->url();
-        $method = $request->$method();
 
-        return view('config');
+    public function index(Request $request) {
+
+    $nome = 'Marcos';
+    $idade = 75;
+
+    $data = [
+        'nome'=> $nome,
+        'idade'=> $idade
+    ];
+        
+    return view('admin.config', $data);
     }
 
     public function info() {
